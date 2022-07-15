@@ -21,7 +21,7 @@
             width: 80%;
             padding: 30px 20px;
         }
-        .text-30-600-36{
+        .text-30-700-36{
             color: var(--black-light);
             @include breakpoint(ipad){
                 @include pxtorem(20);
@@ -67,34 +67,31 @@
                 }
                 .form-floating>label{
                     @include pxtorem(18);
-                    // display: flex;
-                    // justify-content: center;
-                    // align-items: center;
                     font-family: 'Lato';
                     color: var(--gray-light);
                     @include breakpoint(ipad) {
                         @include pxtorem(14);
                     }
                 }
-                .btn{
-                    @include margin {
-                        margin: 30px auto 0px;
-                    }
-                    width: 100%;
-                    @include width_height(81%,50px);
-                    @include pxtorem(20);
-                    @include line_height(24px);
-                    @include breakpoint(sm) {
-                    @include width_height(220px,50px);
-                    }
-                    @include breakpoint(ipad){
-                        @include pxtorem(18);
-                    }
-                    &:focus {
-                        outline: none;
-                        box-shadow: none;
-                    }
-                }
+                // .btn{
+                //     @include margin {
+                //         margin: 30px auto 0px;
+                //     }
+                //     width: 100%;
+                //     @include width_height(81%,50px);
+                //     @include pxtorem(20);
+                //     @include line_height(24px);
+                //     @include breakpoint(sm) {
+                //     @include width_height(220px,50px);
+                //     }
+                //     @include breakpoint(ipad){
+                //         @include pxtorem(18);
+                //     }
+                //     &:focus {
+                //         outline: none;
+                //         box-shadow: none;
+                //     }
+                // }
                 .invalid-feedback{
                     text-align: left;
                 }
@@ -119,6 +116,25 @@
                     margin: 0px auto !important;
                 }
             }
+        }
+    }
+    .btn{
+        @include margin {
+            margin: 30px auto 0px;
+        }
+        width: 100%;
+        @include width_height(81%,50px);
+        @include pxtorem(20);
+        @include line_height(24px);
+        @include breakpoint(sm) {
+        @include width_height(220px,50px);
+        }
+        @include breakpoint(ipad){
+            @include pxtorem(18);
+        }
+        &:focus {
+            outline: none;
+            box-shadow: none;
         }
     }
 }

@@ -1,26 +1,389 @@
-<app-header></app-header>
+
+<!-- Home_page-headerSection -->
+<header class="fixed-top header_section">
+    <div class="container-fluid">
+        <div class="hero_section">
+            <div class="hero_logo">
+                <div class="text-50-900-60" routerLink="/">Reverse Glassdoor</div>
+            </div>
+            <div class="hero_text">
+              <ul class="text-26-500-36">
+                <li (click)="changeStep('login', 1)"><a>Login</a></li>
+                <li (click)="changeStep('signup',1)"><a>Sign up</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- popup_section -->
+<div class="login_popup h-100 d-flex justify-content-center align-items-center"> 
+    <!-- //logincard -->
+    <div class="card section" id="stepOne" *ngIf="step==1 && login"  data-backdrop="true">
+        <div class="card-title">
+            <h1 class="text-30-700-36">Login to find out about <br> your candidate</h1>
+            <h3 class="text-18-400-27">By proceeding you agree to our <span>T & C</span></h3>
+        </div>
+        <div class="card-body p-0">
+            <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group form-floating mb-4">
+                    <input
+                        type="text" 
+                        id="floatingInput" 
+                        formControlName="email" 
+                        class="form-control" 
+                        placeholder="name@example.com" 
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" 
+                    >
+                    <label for="floatingInput" >
+                        Email address
+                    </label>
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group form-floating mb-4">
+                    <input 
+                        type="text" 
+                        formControlName="password"
+                        class="form-control" 
+                        id="floatingPassword" 
+                        placeholder="Password"
+                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" 
+                    >
+                    <label for="floatingPassword">
+                        Password
+                    </label>
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                        <div *ngIf="f['password'].errors['required']">password is required</div>
+                    </div>
+                </div>
+                <div *ngIf="submitted && UserNotExist" class="invalid-feedback">
+                    <div *ngIf="UserNotExist">User not exists</div>
+                </div>
+                <div class="">
+                    <button class="btn">Login</button> 
+                </div>
+                <div class="">
+                    <h3 class="text-18-400-27" (click)="changeStep('login',2)"><span>Forgot password ?</span></h3>
+                    <h3 class="text-18-400-27" (click)="changeStep('signup',1)">Don’t have an account ? <span>Sign Up</span></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- //Forgot Your Password? -->
+    <div class="card" *ngIf="step==2  && login">
+        <div class="card-title">
+            <h1 class="title text-30-700-36">Forgot Your Password?</h1>
+            <h3 class="text-18-400-27">Please enter registered e-mail address <br> You will recieve an OTP to the given e-mail.</h3>
+        </div>
+        <div class="card-body p-0">
+            <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group form-floating mb-4">
+                    <input
+                        type="text" 
+                        id="floatingInput" 
+                        formControlName="email" 
+                        class="form-control" 
+                        placeholder="name@example.com" 
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" 
+                    >
+                    <label for="floatingInput" >
+                        Email address
+                    </label>
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="btnn">
+                    <button class="btn" (click)='startTimer()'>Request OTP</button>
+                </div>
+                <div class="">
+                    <h3 class="text-18-400-27" (click)="changeStep('login',1)"><span>Back to Login</span></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- //OTP Verification -->
+    <div class="card" *ngIf="step==3  && login">
+        <div class="card-title">
+            <h1 class="title text-30-700-36">OTP Verification</h1>
+            <h3 class="text-18-400-27">We have sent an OTP to the given mail address.<br>(mailaddress@company.com)</h3>
+        </div>
+        <div class="card-body p-0">
+           <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group form-floating mb-4">
+                    <input 
+                        type="text" 
+                        formControlName="otp"
+                        class="form-control" 
+                        id="floatingInput" 
+                        placeholder="Enter OTP" 
+                        type="text" 
+                        [ngClass]="{ 'is-invalid': submitted && f['otp'].errors }" 
+                    >
+                    <label for="floatingInput">
+                        Enter OTP
+                    </label>
+                    <div *ngIf="submitted && f['otp'].errors" class="invalid-feedback">
+                        <div *ngIf="f['otp'].errors['required']">Please enter OTP</div>
+                    </div>
+                    <div class="text-18-400-27">Try again in : <span id="timer">{{timeLeft}} sec</span></div>
+                </div>
+                <div class="btnn">
+                    <button class="btn">Verify OTP</button>
+                </div>
+                <div class="">
+                    <h3 class="text-18-400-27" (click)="changeStep('login',1)"><span>Back to Login</span></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Change Password -->
+    <div class="card" *ngIf="step==4  && login">
+        <div class="card-title">
+            <h1 class="title text-30-700-36">Change Password</h1>
+            <h3 class="text-18-400-27"><B>Note:</B> Shouldn’t repeat previous two passwords</h3>
+            <h3 class="text-18-400-27 pt-0">Password should contain minimum 8 <br>characters (An upper case, lower case, special<br> characters and numbers).</h3>
+        </div>
+        <div class="card-body p-0">
+            <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group form-floating mb-4">
+                    <input 
+                        type="text" 
+                        formControlName="createpassword"
+                        class="form-control" 
+                        id="floatingPassword" 
+                        placeholder="Create Password"
+                        [ngClass]="{ 'is-invalid': submitted && f['createpassword'].errors }" 
+                    >
+                    <label for="floatingPassword">
+                        Create Password
+                    </label>
+                    <div *ngIf="submitted && f['createpassword'].errors" class="invalid-feedback">
+                        <div *ngIf="f['createpassword'].errors['required']">password is required</div>
+                        <div *ngIf="f['createpassword'].errors['minlength']">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group form-floating mb-4">
+                    <input 
+                        type="text" 
+                        formControlName="confirmpassword"
+                        class="form-control" 
+                        id="floatingPassword" 
+                        placeholder="Re-type Password"
+                        [ngClass]="{ 'is-invalid': submitted && f['confirmpassword'].errors }" 
+                    >
+                    <label for="floatingPassword">
+                        Re-type Password
+                    </label>
+                    <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
+                        <div *ngIf="f['confirmpassword'].errors['required']">Confirm password is required</div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="btn">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="signup_popup h-100 d-flex align-items-center justify-content-center">
+    <div class="card" *ngIf="step==1 && signup">
+        <div class="card-title">
+            <h1 class="text-30-700-36">Sign up and find out about<br>your candidate</h1>
+            <h3 class="text-18-400-27">By proceeding you agree to our <span>T & C</span></h3>
+        </div>
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group form-floating mb-4">
+                            <input 
+                                type="text" 
+                                formControlName="name"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Enter your Name" 
+                                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" 
+                            >
+                            <label for="floatingInput">
+                                Enter your Name
+                            </label>
+                            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                                <div *ngIf="f['name'].errors['required']">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-floating mb-4">
+                            <input 
+                                type="text" 
+                                formControlName="companyName"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Organisation Name"
+                                [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }" 
+                            >
+                            <label for="floatingInput">
+                                Organisation Name
+                            </label>
+                            <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['companyName'].errors['required']">Organisation Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-floating mb-4">
+                            <input
+                                type="number" 
+                                id="floatingInput" 
+                                formControlName="phoneNumber" 
+                                class="form-control" 
+                                placeholder="Your phone number" 
+                                [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }" 
+                            >
+                            <label for="floatingInput" >
+                                Your phone number
+                            </label>
+                            <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="f['phoneNumber'].errors['required']">PhoneNumber is required</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group form-floating mb-4">
+                            <input
+                                type="text" 
+                                id="floatingInput" 
+                                formControlName="email" 
+                                class="form-control" 
+                                placeholder="Official Email Address" 
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" 
+                            >
+                            <label for="floatingInput" >
+                                Official Email Address
+                            </label>
+                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-floating mb-4">
+                            <input 
+                                type="text" 
+                                formControlName="createpassword"
+                                class="form-control" 
+                                id="floatingPassword" 
+                                placeholder="Create Password"
+                                [ngClass]="{ 'is-invalid': submitted && f['createpassword'].errors }" 
+                            >
+                            <label for="floatingPassword">
+                                Enter Password
+                            </label>
+                            <div *ngIf="submitted && f['createpassword'].errors" class="invalid-feedback">
+                                <div *ngIf="f['createpassword'].errors['required']">password is required</div>
+                                <div *ngIf="f['createpassword'].errors['minlength']">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-floating mb-4">
+                            <input 
+                                type="text" 
+                                formControlName="confirmpassword"
+                                class="form-control" 
+                                id="floatingPassword" 
+                                placeholder="Re-type Password"
+                                [ngClass]="{ 'is-invalid': submitted && f['confirmpassword'].errors }" 
+                            >
+                            <label for="floatingPassword">
+                                Confirm Password
+                            </label>
+                            <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
+                                <div *ngIf="f['confirmpassword'].errors['required']">Confirm password is required</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="">
+                <h3 class="text-18-400-27">Password should contain minimum 8 characters (An upper case, lower case, special <br>characters and numbers).</h3>
+                <button class="btn" (click)="onSubmit()">Register</button>
+                <h3 class="text-18-400-27">Already have an account ? <span (click)="changeStep('login',1)"> Login</span></h3>
+            </div>
+        </div>
+    </div>
+
+     <!-- //OTP Verification -->
+     <div class="card" *ngIf="step==2 && signup">
+        <div class="card-title">
+            <h1 class="title text-30-700-36">OTP Verification</h1>
+            <h3 class="text-18-400-27">We have sent an OTP to the given mail address.<br>(mailaddress@company.com)</h3>
+            <h3 class="text-18-400-27">Valid till : <span id="timer">{{timeLeft}}</span></h3>
+        </div>
+        <div class="card-body p-0">
+           <form id="#registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group form-floating mb-4">
+                    <input 
+                        type="text" 
+                        formControlName="otp"
+                        class="form-control" 
+                        id="floatingInput" 
+                        placeholder="Enter OTP" 
+                        type="text" 
+                        [ngClass]="{ 'is-invalid': submitted && f['otp'].errors }" 
+                    >
+                    <label for="floatingInput">
+                        Enter OTP
+                    </label>
+                    <div *ngIf="submitted && f['otp'].errors" class="invalid-feedback">
+                        <div *ngIf="f['otp'].errors['required']">Please enter OTP</div>
+                    </div>
+                </div>
+                <div class="btnn">
+                    <button class="btn">Verify OTP</button>
+                </div>
+                <div class="">
+                    <h3 class="text-18-400-27"><span>Back to Login</span></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Content_section -->
 <div class="home_section">
     <div class="hero_section">
-        <div class="container">
-            <div class="card">
+        <div class="container-fluid">
+            <div class="card" #write>
                 <div class="card_title text-center">
                     Search and find out about candidates
                 </div>
                 <form action="/action_page.php">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Name / Email Address / Phone number" name="email">
+                      <input id = "search" type="text" class="form-control" placeholder="Search with candidate's Name" name="email">
                       <span class="input-group-text">
                           <figure>
-                            <img src="../../assets/Images/Search_buttonicon.svg" alt="Search_buttonicon">
+                              <a routerLink="/searchresultfromhome">
+                                <img src="../../assets/Images/Search_buttonicon.svg" alt="Search_buttonicon">
+                              </a>
                           </figure>
                       </span>
                     </div>
                 </form>
+                <div class="write-reviewbtn text-30-500-36">
+                    <span>
+                        <img src="../../assets/Images/write_review_icon.svg" alt="write_review_icon">
+                    </span>
+                    Write a review?
+                </div>
             </div>
         </div>
     </div>
     <div class="search_candidate_section">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="search_candidates_textarea">
@@ -29,10 +392,10 @@
                             Ratings given by other companies and HRs
                         </h1>
                         <small>
-                            Search about the candidatesusing their details mentioned in the resume
+                            Search about the candidates using their details mentioned in the resume
                             and find out what other companies have to say about them before hiring.
                         </small><br>
-                        <div class="btn">
+                        <div class="btn" (click)="write.scrollIntoView({ behavior: 'smooth', block: 'center' })">
                             <span>
                                 <img src="../../assets/Images/searchicon_candidate.svg" alt="searchicon_candidate">
                             </span>
@@ -40,8 +403,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
+                <!-- <div class="col-md-1"></div> -->
+                <div class="col-md-6">
                    <div class="search_candidates_img">
                     <figure>
                         <img src="../../assets/Images/search_candidate.svg" alt="search_candidate"  width="100%">
@@ -52,16 +415,16 @@
         </div>
     </div>
     <div class="write_review_section">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="write_review_img">
                         <figure>
                             <img src="../../assets/Images/Write_review.svg" alt="Write_review" width="100%">
                         </figure>
                    </div>
                 </div>
-                <div class="col-md-1"></div>
+                <!-- <div class="col-md-1"></div> -->
                 <div class="col-md-6">
                     <div class="write_review_textarea">
                         <h1>
@@ -69,10 +432,10 @@
                             in your interview
                         </h1>
                         <small>
-                            Search about the candidatesusing their details mentioned in the resume
+                            Search about the candidates using their details mentioned in the resume
                             and find out what other companies have to say about them before hiring.
                         </small><br>
-                        <div class="btn write-review_btn">
+                        <div class="btn write-review_btn" (click)="write.scrollIntoView({ behavior: 'smooth', block: 'center' })">
                             <span>
                                 <img src="../../assets/Images/write_review_icon.svg" alt="write_review_icon">
                             </span>
@@ -84,4 +447,8 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
 
+<!-- <ngb-toast [autohide]="true"  *ngIf="show" [delay]="5000">
+    {{message}}
+</ngb-toast> -->

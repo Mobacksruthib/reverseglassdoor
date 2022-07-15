@@ -1,132 +1,290 @@
 @import "/src/styles/mixins";
 @import "/src/styles/extend";
+@keyframes mymove {
+    0%  {transform:translateY(500px);}
+    100% { transform:translateY(0)}
+  }
 
 .dashboardpage_header{
-    padding: 20px 20px;
-    margin-top:92px;
+    @include margin {
+        padding-top: 110px;
+    }
+    z-index: 1;
     background-color: var(--white);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
-    //height: 130px;
-    @include breakpoint(sm){
-        //height: 130px;
-        margin-top:101px;
-    }
-    // .vertical_line{
-    //     border-right:  2px solid #B8B8B8;
-    //     position: relative; 
+    // @include breakpoint(sm){
+    //     margin-top:  110px;
     // }
-    // #verticle-line {
-    //     width: 1px;
-    //     min-height: 10px;
-    //     border-right:  2px solid #B8B8B8;
-    //     height: 130px;
-    // }
-    .vertical_line{
-        height: 108px;
-        width: 1px;
-        background-color: red;
-        position: absolute;
-        padding: 0px;
-        top: 0;
+    @include breakpoint(xs){
+        padding-top: 80px;
     }
-    .row{
-        // display: flex;
-        // justify-content: space-between;
+    @include breakpoint(ipad){
+        padding-top: 80px;
     }
-    .btn{
-        @include width_height(250px, 67px);
-        @include breakpoint(ipad) {
-            @include width_height(230px, 60px);
+    .search-bar-container{
+        @include breakpoint(sm){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
         }
-    }
-    .write-review_btn{
-        display: flex;
-        justify-content: space-evenly;
-        // padding: 30px;
-        @include pxtorem(25);
-        @include line_height(30px);
-        @include breakpoint(ipad) {
+        .action_btn{
             @include pxtorem(20);
-        }
-        @include breakpoint(xs){
+            @include line_height(30px);
+            @include font(600);
+            color: var(--purple);
+            cursor: pointer;
+            @include breakpoint(sm){
+            display: flex;
+            justify-content: center;
+            align-items: center;
             @include margin {
-            margin: 0px 0px 10px 0px;
+                margin: 0px 0px 0px 20px;
             }
-         }
-    }
-    form{
-        @include breakpoint(md){
-             width: 80%;
-        }
-        input{
-            height: 67px;
-            @include breakpoint(xSmall){
-                height: 50px;
+           }
+            @include breakpoint(xs){
+                @include pxtorem(16);
+                line-height: 20px;
+                padding:20px 0; 
             }
-            &:focus {
-                outline: none;
-                box-shadow: none;
+            @include breakpoint(md){
+                @include pxtorem(25);
+            }
+            &:hover{
+                opacity: 0.8;
             }
         }
-        .input-group-text{
-            height: 67px;
-            @include breakpoint(xSmall){
-                height: 50px;
+        .search-bar{
+            @include breakpoint(sm){
+                width: 60%;
             }
-            img{
+        }
+        .btn{
+            @include width_height(290px, 67px);
+            @include breakpoint(ipad) {
+                @include width_height(200px, 60px);
+            }
+            @include breakpoint(xs) {
+                @include width_height(180px, 50px);
+            }
+        }
+        .write-review_btn{
+            display: flex;
+            justify-content: space-evenly;
+            @include pxtorem(25);
+            @include line_height(30px);
+            @include breakpoint(ipad) {
+                @include pxtorem(20);
+            }
+            @include breakpoint(xs){
+                @include line_height(24px);
+                @include pxtorem(16);
+                @include margin {
+                margin: 10px 0px 10px 0px;
+                }
+             }
+             img{
+                @include breakpoint(xs){
+                    @include width_height(25px, 30px);
+                }
+            }
+        }
+        .vl {
+            border-right: 1px solid #FFFFFF;
+            height: 8em;
+            width: 1px;
+            margin-left: 2em;
+            box-shadow: 1px 0px 4px rgba(98, 23, 124, 0.25);
+            @include breakpoint(xs){
+                @include width_height (0px, 0px)
+             }
+          }
+        form{
+            i{
+                position:relative;
+                left:2em;
+                top:0.8em;
+                font-size: 2em;
+                z-index:999;
                 @include breakpoint(xSmall){
-                    width: 30px;
+                    left: 35px;
+                }
+            }
+            input{
+                height: 67px;
+                padding: 0 2.5em;
+                @include pxtorem(25);
+                @include line_height(30px);
+                @include font(400);
+                border-radius: 5px !important;
+                @include breakpoint(xSmall){
+                    @include pxtorem(18);
+                    height : 50px;
+                }
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            .input-group{
+                @include breakpoint(xSmall){
+                position: relative;
+                left: -22px;
+                }
+            }
+            .input-group-text{
+                height: 67px;
+                @include breakpoint(xSmall){
+                    height : 50px;
+                }
+                img{
+                    @include breakpoint(xSmall){
+                        width: 40px;
+                        border-radius: 10px;
+                        height : 50px;
+                    }
                 }
             }
         }
     }
-    .action_btn{
-        @include pxtorem(20);
-        @include line_height(30px);
-        @include font(500);
-        color: var(--purple);
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include margin {
-            margin: 0px 0px 0px 20px;
-        }
-        @include breakpoint(xs){
-            @include pxtorem(16);
-            line-height: 20px;
-        }
-        @include breakpoint(md){
-            @include pxtorem(25);
-        }
-        &:hover{
-            opacity: 0.8;
-        }
-
-    }
 }
-
 
 .candidates_details{
     position: relative;
-    margin-top: 10%;
+    padding-top: 10%;
+    @include breakpoint(ipad){
+        padding-top: 15%;
+    }
+    @include breakpoint(xs){
+        padding-top: 54%;
+    }
+    background-color: var(--dusky-white);
     .card{
-        @include breakpoint(sm){
-            // @include width_height(422px, 422px);
-        }
         padding: 30px;
         border-radius: 10px;
+        .figure{
+            position: relative;
+            border-radius: 100%;
+            @include width_height(149px, 149px);
+            img {
+                background-size: cover;
+                border-radius: 100%;
+                object-fit: scale-down;
+                @include width_height(149px, 149px);
+
+            }
+            .edit-icon{
+                position: absolute;
+                width: 2em;
+                height: 2em;
+                font-size: 1.4em;
+                padding: 0.4em;
+                top: 6em;
+                left: 6em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--purple);
+                background-color: var(--light-purple);
+                border-radius: 100%;
+            }
+        }
+
+        #uploadPhotoModal{
+            .modal-content{
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                padding: 0 1em;
+                text-align: right;
+                background-color: white;
+                position: relative;
+                @include width_height (820px, 380px) ;
+                @include breakpoint(ipad){
+                @include width_height (540px, 380px) ;
+                }
+                @include breakpoint(xs){
+                @include width_height (300px, 380px) ;
+                }
+                    a{
+                       text-decoration: none;
+                       color: var(--grey-light);
+                       font-size: 4em;
+                    }
+                    .body-modal{
+                        display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    background-color: white;
+                    align-items: center;
+                    text-align: center;
+                    color: var(--black-light);
+                    @include width_height (800px, 380px) ;
+                    @include breakpoint(ipad){
+                    @include width_height (520px, 380px) ;
+                    }
+                    @include breakpoint(xs){
+                    @include width_height (280px, 380px) ;
+                    }
+                    .text-18-400-22{
+                        @include pxtorem(18);
+                        @include line_height(21px);
+                        @include font(400);
+                    }
+                    .btn{
+                        margin-bottom: 2.5em;
+                        position: relative;
+                        overflow: hidden;
+                        @include breakpoint(ipad){
+                            height: 45px;
+                            margin: 1em 0;
+                        }
+                        input{
+                            position: absolute;
+                            top: 0;
+                            right:0;
+                            min-width: 100%;
+                            min-height: 100%;
+                            font-size: 100px;
+                            text-align: right;
+                            opacity: 0;
+                            outline: none;
+                            cursor: pointer;
+                            display: block;
+                        }
+                    }
+                    }
+                       }
+        }
+      
+        
         .profile_details{
             .text-35-700-42{
                 @include pxtorem(35);
                 @include line_height(42px);
+                @include margin {
+                    margin-top: 0.3em;
+                }
                 @include font(700);
                 @include breakpoint(ipad){
                     @include pxtorem(20);
                     @include line_height(30px);
+                }
+            }
+            .more-horiz-icon{
+                float: right;
+                width: 3em;
+                height: 2em;
+                padding: 1em;
+                box-shadow: 1px 1px var(--purple);
+                border-radius: 3px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                i{
+                    color: var(--purple);
                 }
             }
             a{
@@ -145,10 +303,21 @@
         }
     }
     .feedback_insights{
-        @include width_height(956px, auto);
+        width: 100%;
         //optional
         .card_height{
-            height: 200px;
+            height: auto;
+            @include breakpoint(sm){
+                height: 200px;
+            }
+        }
+        .content__part{
+            transform:translateY(500px);
+            animation-name:mymove;
+            animation-fill-mode: forwards;
+            animation-duration:1s;
+            animation-timing-function: ease-out;
+            
         }
         .card{
             .card-title{
@@ -156,15 +325,21 @@
                 @include line_height(36px);
                 @include font(700);
                 color: var(--black);
+                @include breakpoint(ipad){
+                    @include pxtorem(25);
+                }
             }
             .nav-tabs{
                 border-bottom: none;
                 display: flex;
                 justify-content: space-between;
-                .nav-link{
+                .nav-item{
                     cursor: pointer;
+                    .nav-link{
                     border: none;
-                    &:hover,&:active{
+                    color: var(--black-light);
+                    }
+                   &:hover,[class*= "active"]  {
                         color: var(--purple) !important;
                         border-bottom: 5px solid #62177C !important;
                     }
@@ -172,7 +347,7 @@
                         @include pxtorem(40);
                         @include line_height(48px);
                         @include font(500);
-                        color: var(--black-light);
+                        // color: var(--black-light);
                         text-align: center; 
                         @include breakpoint(ipad){
                             @include pxtorem(20 );
@@ -182,64 +357,61 @@
                         @include pxtorem(22);
                         @include line_height(26px);
                         @include font(500);
-                        color: var(--black-light);
                         @include breakpoint(ipad){
                             @include pxtorem(18);
                         }
                     }
                 }
             }
-            .text-25-700-30{
-                @include pxtorem(25);
-                @include line_height(30px);
-                @include font(400);
-                color: var(--black);
-                padding: 45px 0px 20px 0px;
-                @include breakpoint(ipad){
-                    @include pxtorem(18);
-                }
-            }
-            .text-25-400-30{
-                color: var(--black-light);
-            }
-            .text-20-400-24{
-                @include pxtorem(20);
-                @include line_height(24px);
-                @include font(400);
-                color:var(--grey-lighter);
-                @include breakpoint(ipad){
-                    @include pxtorem(16);
-                }
-            }
-            .text-18-400-21{
-                @include pxtorem(18);
-                @include line_height(21px);
-                @include font(400);
-                color: var(--blue);
-                text-decoration: underline;
-                padding-left: 40px;
+            .thumbs-rating{
+                .thumbs-up-rating , .thumbs-down-rating {
+                    position: relative;
+                    display: inline-block;
+                    .tooltiptext{
+                    visibility: hidden;
+                    @include width_height(200px, 50px);
+                    background-color: var(--white);
+                    color: var(--black);
+                    text-align: center;
+                    border-radius: 20px;
+                    padding: 2px 0;
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    position: absolute;
+                    z-index: 1;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -60px;
+                    }
+                    &:hover .tooltiptext{
+                        visibility: visible;
+                    }
+                  }
             }
             .view_btn{
-                @include width_height(230px, 60px);
-                border:2px solid #62177C;
-                border-radius: 5px;
-                color: var(--purple);
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 // add icons and remove the padding
                 margin-bottom: 45px;
+                @include breakpoint(ipad){
+                    padding: 5px 10px;
+                }
+                @include breakpoint(xs){
+                    margin-bottom: 40px;
+                }
             }
-            .text-20-600-24{
-                @include pxtorem(20);
-                @include line_height(24px);
-                @include font(600);
-                color:var(--light-green);  
-                padding: 45px; 
+            .text-right{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+                @include breakpoint(xs){
+                    align-items: flex-start;
+                }
             }
-            .rejected_color{
-                color: var(--red);
+        }
+        .candidateCard:nth-last-child(1){
+            hr{
+                display: none;
             }
         }
     }
 }
+

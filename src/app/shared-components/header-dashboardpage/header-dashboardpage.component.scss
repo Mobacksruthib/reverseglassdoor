@@ -2,12 +2,16 @@
 @import "/src/styles/extend";
 
 .header_section{
-    padding: 20px 20px;
+    padding: 20px;
     background-color: var(--white);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
     .hero_section{
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        @include breakpoint(xSmall){
+            justify-content: center;
+        }
         .hero_logo{
             display: flex;
             justify-content: center;
@@ -30,37 +34,168 @@
         }
         .hero_icons{
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            ul{
-                list-style-type: none;
-                display: flex;
-                @include margin {
-                    margin: 10px 0px;
+            margin-right: 3em;
+            @include breakpoint(ipad){
+                margin-right: 0;
+            }
+            .hdr-btn{
+                @include breakpoint(min1200) {
+                    @include width_height(180px, 50px);
                 }
-                li{
-                    padding-left: 71px;
-                    cursor: pointer;
-                    &:hover{
-                        opacity: 0.8;
-                    }
-                    @include breakpoint(xSmall) {
-                        padding-left: 15px;
-                    }
+                color: var(--purple);
+                background-color: white;
+                border: 2px solid var(--purple);
+                @include font(400);
+                min-width: 119.38px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                @include pxtorem(20);
+                @include line_height(30px);
+                @include breakpoint(ipad){
+                    border: 2px solid var(--purple);
+                    padding: 5px 10px;
+                    @include font(400);
+                }
+                @include breakpoint(xs) {
+                    @include line_height(16px);
+                    @include pxtorem(17);
+                    margin-left: 5px;
+                }
+            }
+            .dropdown{
+                padding-left: 71px;
+                cursor: pointer;
+                z-index: 2;
+                position: static;
+                &:hover{
+                    opacity: 1;
+                }
+                @include breakpoint(ipad) {
+                    padding-left: 40px;
+                }
+                @include breakpoint(xSmall) {
+                    padding-left: 15px;
+                }
+                img{
+                    width: 45px;
+                    height: 45px; 
                     @include breakpoint(ipad) {
-                        padding-left: 40px;
+                        @include width_height(30px,30px);
                     }
-                    img{
-                        width: 30px;
-                        height: 30px; 
-                        @include breakpoint(sm) {
-                            @include width_height(40px,40px);
+                }
+                .dropdown-menu{
+                    padding: 0;
+                    width: 32em;
+                    border-radius: 10px;
+                    @include breakpoint(xs){
+                        width: 18em;
+                    }
+                
+                .card{
+                    padding: 0 1em;
+                    border-radius: 10px;
+                    width: 100%;
+                    .card-title{
+                        margin: 1em;
+                        @include pxtorem(30);
+                        @include line_height(36px);
+                        @include font(700);
+                        color: var(--black);
+                        @include breakpoint(ipad){
+                            @include pxtorem(20);
                         }
                     }
-                }
+                    .card-body{
+                        padding: 0;
+                        .card{
+                            width: 100%;
+                           margin: 5px 0;
+                           border-top: none;
+                            .card-body{
+                                padding: 2px;
+                                overflow:hidden;
+                                clear: both;
+                            }
+                        }
+                        .text-20-600-24{
+                            @include pxtorem(20);
+                            @include line_height(24px);
+                            @include font(400);
+                            color:var(--black);  
+                            padding: 45px 0px; 
+                            @include breakpoint(xs){
+                            @include pxtorem(14);
+                            @include line_height(12px);
+                            }
+                            .status{
+                                width: 0.8em;
+                            }
+                        }
+                        .text-18-400-21{
+                            @include pxtorem(18);
+                            @include line_height(21px);
+                            @include font(400);
+                            margin: 10px 0;
+                            padding: 0;
+                            text-decoration: none;
+                            text-align: start;
+                            color: gray;
+                            @include breakpoint(ipad){
+                                @include pxtorem(12);
+                            }
+                        }
+                        .reject{
+                            border-left: 10px solid var(--red);
+                        }
+                        .approve{
+                            border-left: 10px solid var(--light-green);
 
+                        }
+                       
+                        .rejected_color{
+                            color: var(--red);
+                        }
+                        .approved_color{
+                            color: var(--light-green);
+                        }
+                    } 
+                }
             }
-        }
+            #edit-profile{
+                width: 10em;
+                border-radius: 10px;
+                // padding: 1em;
+                &:hover{
+                    opacity: 1;
+                }
+                @include breakpoint(sm){
+                    width: 5em;
+                    padding: 5px;
+                }
+                .text-20-600-24{
+                    @include pxtorem(20);
+                    @include line_height(24px);
+                    @include font(400);
+                    color:var(--black);  
+                    @include breakpoint(xs){
+                        @include pxtorem(14);
+                    @include line_height(12px);
+                    }
+                }
+                a{
+                    padding: 1em;
+                    &:hover{
+                        background-color: var(--hover);
+                    }
+                }
+            }
+        }   
     }
+}
 }
 

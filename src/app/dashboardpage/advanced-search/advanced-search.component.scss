@@ -1,0 +1,178 @@
+@import "/src/styles/mixins";
+@import "/src/styles/extend";
+
+
+@keyframes from-top {
+    0%  {transform:translateY(-1000px);}
+    100% { transform:translateY(0)}
+  }
+
+.Advancesearch_section{
+    background-color: var(--dusky-white) !important;
+    height: 100vh;
+    .card{
+        padding: 60px 0px;
+        @include breakpoint(ipad){
+            margin-top: -10px;
+        }
+        transform:translateY(-1000px);
+        animation-name:from-top;
+        animation-fill-mode: forwards;
+        animation-duration:1s;
+        animation-timing-function: ease-out;
+        .card-title{
+            @include breakpoint (xs){
+                text-align: center;
+                @include pxtorem(20);
+                padding: 0px 30px;
+                @include line_height(30px);
+            }
+        }
+        .down{
+            transform:translateY(-1000px);
+            animation-name:from-top;
+            animation-fill-mode: forwards;
+            animation-duration:1s;
+            animation-timing-function: ease-out;
+            animation-delay: 1s;
+        }
+    .form__section{
+        transform:translateY(-1000px);
+        animation-name:from-top;
+        animation-fill-mode: forwards;
+        animation-duration:1s;
+        animation-timing-function: ease-out;
+        animation-delay: 1s;
+        .form-group{
+            @include margin {
+                margin-top: 30px;
+            }
+        }
+        label{
+            @include font(500);
+            @include pxtorem(20);
+            @include line_height(24px);
+            @include breakpoint (sm){
+                height: 40px;
+                display: flex;
+                align-items:flex-end;
+                padding: 0px 20px;
+            }
+            @include breakpoint(ipad){
+                @include pxtorem(16);
+            }
+        }
+        input{
+            @include margin {
+                margin-top: 10px;
+            }
+            @include pxtorem(18);
+            @include font(400);
+            height: 60px;
+            padding-left: 90px;
+            @include breakpoint(ipad){
+                @include pxtorem(16);
+            }
+            &:focus {
+                outline: none;
+                box-shadow: none;
+               }
+        }
+        .btn{
+            @include margin {
+                margin-top: 70px;
+            }
+            @include width_height(153px, 49px);
+                @include pxtorem(20);
+                @include line_height(24px);
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+        .text-30-700-36{
+        }
+        .text-25-500-30{
+            @include pxtorem(25);
+            @include line_height(30px);
+            @include font(500);
+            color: var(--black);
+            padding: 0px 0px 15px 62px;
+            a{
+                text-decoration: none;
+                color: var(--blue);
+                @include margin {margin-top: 10px;}
+
+            }
+            @include breakpoint(ipad){
+                @include pxtorem(16);
+            }
+        }
+        .fa-check{
+            color: var(--light-green) !important;
+            font-weight: 100;
+        }
+    }
+    .candidate-card{
+        @include margin {margin: 20px 0;}
+        @include breakpoint($min:1300px){
+            width: 85%;
+        }
+        .card{
+            border-radius: 10px;
+            padding: 0;
+            @include breakpoint($min: 768px,$max: 1199px){
+                padding-right: 30px;
+            }
+
+            .btn-sec{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                @include breakpoint(xs){
+                    align-items: center;
+                }
+                .write{
+                    @include width_height(215px, 49px);
+                    // background-color: var(--purple);
+                    color: var(--white);
+                    // border-radius: 5px;
+                    @include margin{margin: 1em 0em};
+                    @include breakpoint(ipad) {
+                        @include width_height(150px, 30px);
+                        @include pxtorem(14);
+                    }
+                    @include breakpoint(xs){
+                        //@include width_height(px, 30px);
+                        @include margin{margin-top: 1em};
+                    }
+                }
+                .check{
+                    @include width_height(215px, 49px);
+                    border: 1px solid var(--purple);
+                    border-radius: 5px;
+                    background-color: white;
+                    color: var(--purple);
+                    @include breakpoint(ipad) {
+                        @include width_height(150px, 30px);
+                        @include pxtorem(14);
+                    }
+                    @include breakpoint(xs){
+                        //@include width_height(215px, 30px);
+                        //@include margin{margin-top: 1em};
+                    }
+                }
+            }
+        }
+    }
+    input.nosubmit {
+        display: block;
+        padding: 9px 4px 9px 40px;
+        background: transparent url("../../../assets/Images/search_icon.svg")no-repeat 40px center;
+        background-size: 30px;
+    } 
+}
+
+
